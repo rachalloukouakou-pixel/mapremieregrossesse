@@ -328,5 +328,20 @@ document.addEventListener('click',function(e){
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
 })();
 </script>
+<script>
+/* Transmet l'identifiant de clic Facebook et les codes de suivi
+   de l'adresse de la page vers les liens de paiement Chariow */
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  if (!params.toString()) return;
+  document.querySelectorAll('a[href*="mychariow.shop"]').forEach(function (a) {
+    var url = new URL(a.href);
+    params.forEach(function (value, key) {
+      if (!url.searchParams.has(key)) url.searchParams.set(key, value);
+    });
+    a.href = url.toString();
+  });
+})();
+</script>
 </body>
 </html>
